@@ -1,4 +1,5 @@
 # This is a comment
+scalar Date @specifiedBy(url: "https://scalars.graphql.org/andimarek/local-date")
 
 # This is a root Object, because it is named Query
 type Query {
@@ -11,4 +12,5 @@ type Pet {
     # A field with the name "name" of type String
     name: String
     color: String
+    dateOfBirth: Date
 }
