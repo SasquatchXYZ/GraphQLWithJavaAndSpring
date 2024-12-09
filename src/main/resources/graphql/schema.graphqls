@@ -4,17 +4,24 @@ scalar Date @specifiedBy(url: "https://scalars.graphql.org/andimarek/local-date"
 # This is a root Object, because it is named Query
 type Query {
     # A field named "pets" which returns a list of Pet
-    pets: [Pet]
-    petsByKind(kind: PetKind!): [Pet] # Used as input type
+    #    pets: [Pet]
+    #    petsByKind(kind: PetKind!): [Pet] # Used as input type
+    favoritePet: Pet
 }
 
 # An object named Pet
 type Pet {
     # A field with the name "name" of type String
     name: String
-    color: String
-    dateOfBirth: Date
-    kind: PetKind # Used as output type
+    owner: Person
+    #    color: String
+    #    dateOfBirth: Date
+    #    kind: PetKind # Used as output type
+}
+
+type Person {
+    firstName: String
+    lastName: String
 }
 
 enum PetKind {
