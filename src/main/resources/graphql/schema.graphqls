@@ -1,8 +1,14 @@
+# This is a comment
+
+# This is a root Object, because it is named Query
 type Query {
+    # A field named "pets" which returns a list of Pet
     pets: [Pet]
 }
 
+# An object named Pet
 type Pet {
+    # A field with the name "name" of type String
     name: String
     color: String
 }
