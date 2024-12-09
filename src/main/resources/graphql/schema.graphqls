@@ -10,13 +10,25 @@ type Query {
 }
 
 # An object named Pet
-type Pet {
+interface Pet {
     # A field with the name "name" of type String
     name: String
     owner: Person
     #    color: String
     #    dateOfBirth: Date
     #    kind: PetKind # Used as output type
+}
+
+type Dog implements Pet {
+    name: String
+    owner: Person
+    doesBark: Boolean
+}
+
+type Cat implements Pet {
+    name: String
+    owner: Person
+    doesMeow: Boolean
 }
 
 type Person {
