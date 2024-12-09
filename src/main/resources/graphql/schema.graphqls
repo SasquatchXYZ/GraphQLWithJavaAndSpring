@@ -5,6 +5,7 @@ scalar Date @specifiedBy(url: "https://scalars.graphql.org/andimarek/local-date"
 type Query {
     # A field named "pets" which returns a list of Pet
     pets: [Pet]
+    petsByKind(kind: PetKind!): [Pet] # Used as input type
 }
 
 # An object named Pet
@@ -13,4 +14,9 @@ type Pet {
     name: String
     color: String
     dateOfBirth: Date
+    kind: PetKind # Used as output type
+}
+
+enum PetKind {
+    CAT, DOG, BIRD
 }
