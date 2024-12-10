@@ -11,4 +11,9 @@ type Pet {
     # A field with the name "name" of type String
     name: String
     color: String
+    owner: Person
+}
+
+type Person {
+    name: String
 }
