@@ -3,15 +3,11 @@ package playground.demo.controllers;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-import playground.demo.domain.ChangePetNamePayload;
-import playground.demo.domain.Person;
-import playground.demo.domain.Pet;
-import playground.demo.domain.PetSearchInput;
+import playground.demo.domain.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -30,33 +26,15 @@ public class PetsController {
     }
 
     @QueryMapping
-    Flux<Pet> pets() {
-        return petWebClient.get()
-                .uri("/pets")
-                .retrieve()
-                .bodyToFlux(Pet.class);
-    }
+    Flux<Object> creatures() {
+        // Add your fetching logic
 
-    @SchemaMapping
-    Mono<Person> owner(Pet pet) {
-        return ownerWebClient.get()
-                .uri("/owner/{id}", pet.ownerId())
-                .retrieve()
-                .bodyToMono(Person.class);
-    }
-
-    @QueryMapping
-    Mono<Pet> pet(@Argument String id) {
-        return petWebClient.get()
-                .uri("/pets/{id}", id)
-                .retrieve()
-                .bodyToMono(Pet.class);
-    }
-
-    @QueryMapping
-    Flux<Pet> petSearch(@Argument PetSearchInput input) {
-        // perform the search
-        return null;
+        // In-memory example
+        return Flux.just(
+                new Dog("Dog01", "Spot", "Yellow", true),
+                new Cat("Cat01", "Chicken", "Orange", true),
+                new Human("Donna")
+        );
     }
 
     @MutationMapping
