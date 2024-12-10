@@ -4,6 +4,14 @@ type Query {
     petSearch(input: PetSearchInput!): [Pet]
 }
 
+type Mutation {
+    changePetName(id: ID!, newName: String!): ChangePetNamePayload
+}
+
+type ChangePetNamePayload {
+    pet: Pet
+}
+
 input PetSearchInput {
     namePattern: String
     ownerPattern: String
