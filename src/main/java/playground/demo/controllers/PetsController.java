@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.reactive.function.client.WebClient;
 import playground.demo.domain.Person;
 import playground.demo.domain.Pet;
+import playground.demo.domain.PetSearchInput;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -44,5 +45,11 @@ public class PetsController {
                 .uri("/pets/{id}", id)
                 .retrieve()
                 .bodyToMono(Pet.class);
+    }
+
+    @QueryMapping
+    Flux<Pet> petSearch(@Argument PetSearchInput input) {
+        // perform the search
+        return null;
     }
 }

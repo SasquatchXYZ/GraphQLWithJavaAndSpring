@@ -1,13 +1,14 @@
-# This is a comment
-
-# This is a root Object, because it is named Query
 type Query {
-    # A field named "pets" which returns a list of Pet
     pets: [Pet]
     pet(id: ID!): Pet
+    petSearch(input: PetSearchInput!): [Pet]
 }
 
-# An object named Pet
+input PetSearchInput {
+    namePattern: String
+    ownerPattern: String
+}
+
 type Pet {
     id: ID!
     name: String
