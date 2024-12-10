@@ -1,34 +1,26 @@
 package playground.demo.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
-import playground.demo.domain.Cat;
-import playground.demo.domain.Dog;
-import playground.demo.domain.Person;
+import org.springframework.web.reactive.function.client.WebClient;
 import playground.demo.domain.Pet;
-import playground.demo.service.PetService;
+import reactor.core.publisher.Flux;
 
 
 @Controller
 public class PetsController {
 
-    @Autowired
-    PetService petService;
+    WebClient petWebClient;
+
+    PetsController(WebClient.Builder builder) {
+        this.petWebClient = builder.baseUrl("http://pet-service").build();
+    }
 
     @QueryMapping
-    Pet favoritePet() {
-        return petService.getFavoritePet();
-    }
-
-    @SchemaMapping
-    Person owner(Dog dog) {
-        return petService.getPerson(dog.ownerId());
-    }
-
-    @SchemaMapping
-    Person owner(Cat cat) {
-        return petService.getPerson(cat.ownerId());
+    Flux<Pet> pets() {
+        return petWebClient.get()
+                .uri("/pets")
+                .retrieve()
+                .bodyToFlux(Pet.class);
     }
 }
