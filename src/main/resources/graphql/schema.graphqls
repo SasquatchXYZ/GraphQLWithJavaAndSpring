@@ -4,11 +4,12 @@
 type Query {
     # A field named "pets" which returns a list of Pet
     pets: [Pet]
+    pet(id: ID!): Pet
 }
 
 # An object named Pet
 type Pet {
-    # A field with the name "name" of type String
+    id: ID!
     name: String
     color: String
     owner: Person

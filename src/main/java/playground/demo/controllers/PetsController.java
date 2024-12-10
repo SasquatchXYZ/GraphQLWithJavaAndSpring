@@ -1,5 +1,6 @@
 package playground.demo.controllers;
 
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
@@ -35,5 +36,13 @@ public class PetsController {
                 .uri("/owner/{id}", pet.ownerId())
                 .retrieve()
                 .bodyToMono(Person.class);
+    }
+
+    @QueryMapping
+    Mono<Pet> pet(@Argument String id) {
+        return petWebClient.get()
+                .uri("/pets/{id}", id)
+                .retrieve()
+                .bodyToMono(Pet.class);
     }
 }
